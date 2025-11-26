@@ -1,7 +1,7 @@
 "use client";
 import { House } from "lucide-react";
 import { ModeToggle } from "@/lib/mode-toggle";
-import Navigationbar from "@/components/ui/navigation-bar";
+import Navigationbar from "@/registry/new-york/navigation-bar";
 
 const centerLinks = [
   {
