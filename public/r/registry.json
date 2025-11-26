@@ -4,17 +4,17 @@
   "homepage": "my-registry.drosinakis.com",
   "items": [
     {
-      "name": "hello-world",
-      "type": "registry:component",
-      "title": "Hello World",
-      "description": "A simple hello world component",
-      "registryDependencies": [
-        "button"
+      "name": "navigation-bar",
+      "type": "registry:ui",
+      "title": "Navigation Bar",
+      "description": "A simple responsive navigation bar component.",
+      "dependencies": [
+        "motion"
       ],
       "files": [
         {
-          "path": "src/registry/new-york/hello-world/hello-world.tsx",
-          "type": "registry:component"
+          "path": "src/registry/new-york/navigation-bar.tsx",
+          "type": "registry:ui"
         }
       ]
     }

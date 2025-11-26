@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "navigation-bar",
+  "type": "registry:ui",
+  "title": "Navigation Bar",
+  "description": "A simple responsive navigation bar component.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york/navigation-bar.tsx",
+      "content": "\"use client\";\nimport React, { useState } from \"react\";\nimport { AnimatePresence, motion } from \"motion/react\";\nimport { X } from \"lucide-react\";\n\ninterface LinkItemType {\n  name: string;\n  link: string;\n  icon: React.ElementType | undefined;\n}\n\nfunction LinkItem({ item, close }: { item: LinkItemType; close: () => void }) {\n  const Icon = item.icon;\n  return (\n    <li key={item.name} className=\"w-full\">\n      <a\n        onClick={close}\n        className=\"flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 hover:bg-current/20\"\n        href={item.link}\n      >\n        {Icon && <Icon />}\n\n        {item.name}\n      </a>\n    </li>\n  );\n}\n\nexport default function Navigationbar({\n  centerLinks,\n  rightLinks = [],\n}: {\n  centerLinks: LinkItemType[];\n  rightLinks?: (() => React.ReactElement)[];\n}) {\n  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);\n  function close() {\n    setMobileMenuOpen(false);\n  }\n  function open() {\n    setMobileMenuOpen(true);\n  }\n  return (\n    <nav className=\"sticky top-0 mx-auto flex items-center justify-between bg-inherit p-5 px-10 md:p-2 lg:px-10\">\n      <div>Icon</div>\n      <ul className=\"hidden md:flex\">\n        {centerLinks.map((item) => (\n          <LinkItem close={close} key={item.name} item={item} />\n        ))}\n      </ul>\n\n      {rightLinks && (\n        <ul className=\"hidden md:flex\">\n          {rightLinks.map((Item, ind) => (\n            <Item key={ind} />\n          ))}\n        </ul>\n      )}\n      <button onClick={open} className=\"block md:hidden\">\n        open\n      </button>\n      <AnimatePresence>\n        {mobileMenuOpen && (\n          <motion.div\n            exit={{ opacity: 0, width: 0 }}\n            initial={{ opacity: 0, width: 0 }}\n            animate={{\n              opacity: 1,\n              width: \"100%\",\n            }}\n            key={\"mobile-menu\"}\n            className={\n              \"absolute top-0 left-0 h-screen w-screen bg-inherit md:hidden\"\n            }\n          >\n            <div className=\"flex w-full items-center justify-between p-5 px-10\">\n              <div>Icon</div>\n              <button onClick={close}>\n                <X />\n              </button>\n            </div>\n            <ul className=\"flex h-full w-full flex-col items-center justify-center\">\n              {centerLinks.map((item) => (\n                <LinkItem key={item.name} close={close} item={item} />\n              ))}\n              {rightLinks.map((Item, ind) => (\n                <Item key={`a${ind}`} />\n              ))}\n            </ul>\n          </motion.div>\n        )}\n      </AnimatePresence>\n    </nav>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}
