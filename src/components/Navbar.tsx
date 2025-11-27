@@ -6,11 +6,12 @@ import Navigationbar from "@/registry/new-york/navigation-bar";
 const centerLinks = [
   {
     name: "Home",
-    link: "/",
+    link: "#",
     icon: House,
   },
 ];
 const rightLinks = [ModeToggle];
+
 export default function Navbar() {
   return <Navigationbar rightLinks={rightLinks} centerLinks={centerLinks} />;
 }
