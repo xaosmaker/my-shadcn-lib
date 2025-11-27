@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
-interface LinkItemType {
+export interface LinkItemType {
   name: string;
   link: string;
   icon: React.ElementType | undefined;
@@ -13,15 +14,15 @@ function LinkItem({ item, close }: { item: LinkItemType; close: () => void }) {
   const Icon = item.icon;
   return (
     <li key={item.name} className="w-full">
-      <a
+      <Link
         onClick={close}
-        className="flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 hover:bg-current/20"
+        className="flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-nowrap hover:bg-current/20"
         href={item.link}
       >
         {Icon && <Icon />}
 
         {item.name}
-      </a>
+      </Link>
     </li>
   );
 }
@@ -41,8 +42,8 @@ export default function Navigationbar({
     setMobileMenuOpen(true);
   }
   return (
-    <nav className="sticky top-0 mx-auto flex items-center justify-between bg-inherit p-5 px-10 md:p-2 lg:px-10">
-      <div>Icon</div>
+    <nav className="sticky top-0 z-50 mx-auto flex items-center justify-between bg-inherit p-5 px-10 shadow-sm shadow-current/20 md:p-2 lg:px-10 dark:bg-neutral-950">
+      <p>Logo</p>
       <ul className="hidden md:flex">
         {centerLinks.map((item) => (
           <LinkItem close={close} key={item.name} item={item} />
@@ -74,7 +75,7 @@ export default function Navigationbar({
             }
           >
             <div className="flex w-full items-center justify-between p-5 px-10">
-              <div>Icon</div>
+              <p>Logo</p>
               <button onClick={close}>
                 <X />
               </button>
